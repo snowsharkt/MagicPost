@@ -3,9 +3,9 @@ package com.snowshark.MagicPost.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "User")
+@Entity(name = "Employee")
 @Table(
-        name = "user"
+        name = "employee"
 //        uniqueConstraints = {
 //                @UniqueConstraint(name = "", columnNames = "")
 //        }
@@ -16,16 +16,16 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
-public class User {
+public class Employee {
 
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
     )
     @Column(
-            name = "user_id"
+            name = "employee_id"
     )
-    private Long userId;
+    private Long employeeId;
 
     @Column(
             name = "role"
