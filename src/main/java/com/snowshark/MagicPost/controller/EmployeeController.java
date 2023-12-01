@@ -1,6 +1,7 @@
 package com.snowshark.MagicPost.controller;
 
 import com.snowshark.MagicPost.entities.Employee;
+import com.snowshark.MagicPost.errors.EmployeeNotFoundException;
 import com.snowshark.MagicPost.services.EmployeeServices;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,12 @@ public class EmployeeController {
     @GetMapping("/")
     public List<Employee> fetchEmployeeList() {
         return employeeServices.fetchEmployeeList();
+    }
+
+    @GetMapping("/{id}")
+    public Employee fetchEmployeeById(@PathVariable("id") Long employeeId) throws EmployeeNotFoundException {
+        return employeeServices.fetchEmployeeById(employeeId);
+
     }
 
     @DeleteMapping("/{id}")
