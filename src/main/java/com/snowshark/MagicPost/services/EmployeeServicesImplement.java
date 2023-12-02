@@ -61,7 +61,12 @@ public class EmployeeServicesImplement implements EmployeeServices{
 
         if (Objects.nonNull(employeeDB.getPassword())
                 && !employeeDB.getPassword().isEmpty()) {
-            employeeDB.setUsername(employee.getPassword());
+            employeeDB.setPassword(employee.getPassword());
+        }
+
+        if (Objects.nonNull(employeeDB.getRole())
+                && !employeeDB.getRole().isEmpty()) {
+            employeeDB.setRole(employee.getRole());
         }
 
         return employeeRepository.save(employeeDB);
