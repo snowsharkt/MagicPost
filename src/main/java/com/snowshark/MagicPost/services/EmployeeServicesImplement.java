@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class EmployeeServicesImplement implements EmployeeServices{
+public class EmployeeServicesImplement implements EmployeeServices {
 
     private final EmployeeRepository employeeRepository;
 
@@ -52,23 +52,31 @@ public class EmployeeServicesImplement implements EmployeeServices{
         }
         Employee employeeDB = findEmployee.get();
 
-        if (employeeRepository.existsByUsername(employee.getUsername()))
-            throw new Exception("Username existed!");
-        if (Objects.nonNull(employeeDB.getUsername())
-            && !employeeDB.getUsername().isEmpty()) {
+        if (!employee.getUsername().isEmpty()) {
+            if (employeeRepository.existsByUsername(employee.getUsername()))
+                throw new Exception("Username existed!");
             employeeDB.setUsername(employee.getUsername());
         }
 
-        if (Objects.nonNull(employeeDB.getPassword())
-                && !employeeDB.getPassword().isEmpty()) {
+        if (!employee.getPassword().isEmpty()) {
             employeeDB.setPassword(employee.getPassword());
         }
 
-        if (Objects.nonNull(employeeDB.getRole())
-                && !employeeDB.getRole().isEmpty()) {
+        if (!employee.getRole().isEmpty()) {
             employeeDB.setRole(employee.getRole());
         }
 
+        if (!employee.getGender().isEmpty()) {
+            employeeDB.setGender(employee.getGender());
+        }
+
+        if (Objects.nonNull(employee.getWorkAreaId())) {
+            employeeDB.setWorkAreaId(employee.getWorkAreaId());
+        }
+
+        if (Objects.nonNull(employee.getLeaderId())) {
+            employeeDB.setLeaderId(employee.getLeaderId());
+        }
         return employeeRepository.save(employeeDB);
     }
 }

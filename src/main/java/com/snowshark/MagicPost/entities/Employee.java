@@ -6,10 +6,6 @@ import lombok.*;
 @Entity(name = "Employee")
 @Table(
         name = "employee"
-//        uniqueConstraints = {
-//                @UniqueConstraint(name = "", columnNames = "")
-//        }
-
 )
 @Data
 @AllArgsConstructor
@@ -20,7 +16,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.AUTO
+            strategy = GenerationType.IDENTITY
     )
     @Column(
             name = "employee_id"
@@ -41,4 +37,24 @@ public class Employee {
             name = "password"
     )
     private String password;
+
+    @Column(
+            name = "full_name"
+    )
+    private String fullName;
+
+    @Column(
+            name = "gender"
+    )
+    private String gender;
+
+    @Column(
+            name = "work_area_id"
+    )
+    private Long workAreaId;
+
+    @Column(
+            name = "leader_id"
+    )
+    private Long leaderId;
 }
