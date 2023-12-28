@@ -5,12 +5,14 @@ import lombok.*;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Order")
 @Table(
-    name = "order_details",
+    name = "order",
     uniqueConstraints = {
-        @UniqueConstraint(name = "order_code_unique", columnNames = "order_code")
+        @UniqueConstraint(name = "order_id_unique", columnNames = "id")
     }
 )
 @Data
@@ -24,33 +26,51 @@ public class Order {
             strategy = GenerationType.IDENTITY
     )
     @Column(
-            name = "order_id"
+            name = "id"
     )
-    private Long orderId;
+    private Long Id;
 
     @Column(
-            name = "order_code",
+            name = "sender_name",
             nullable = false
     )
-    private String orderCode;
+    private String sender_name;
 
     @Column(
-            name = "send_address",
+            name = "sender_address",
             nullable = false
     )
-    private String sendAddress;
+    private String senderAddress;
 
     @Column(
-            name = "recieve_address",
+            name = "sender_number",
             nullable = false
     )
-    private String recieveAddress;
+    private String senderNumber;
 
     @Column(
-            name = "processing",
+            name = "reciever_name",
             nullable = false
     )
-    private boolean isProcessing;
+    private String recieverName;
+
+    @Column(
+            name = "reciever_address",
+            nullable = false
+    )
+    private String recieverAddress;
+
+    @Column(
+            name = "reciever_number",
+            nullable = false
+    )
+    private String recieverNumber;
+
+    @Column(
+            name = "type",
+            nullable = false
+    )
+    private String type;
 
     @Column(
             name = "delivery_success",
@@ -59,15 +79,22 @@ public class Order {
     private String isDeliverySuccess;
 
     @Column(
-            name = "arrived_time",
+            name = "weight",
             nullable = false
     )
-    private LocalDateTime arrivedTime;
+    private Long weight;
 
-    @Column(
-            name = "paid",
-            nullable = false
+
+    @ManyToOne
+    @JoinColumn(
+            name = "shipment_id",
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "order_shipment_fk"
+            )
     )
-    private boolean isPaid;
+    private Shipment shipment;
+
 
 }

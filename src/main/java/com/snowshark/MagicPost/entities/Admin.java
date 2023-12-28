@@ -3,25 +3,23 @@ package com.snowshark.MagicPost.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "Employee")
+@Entity(name = "Admin")
 @Table(
-        name = "employee"
+        name = "admin"
 )
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@ToString
-public class Employee {
-
+public class Admin {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
     @Column(
-            name = "employee_id"
+            name = "id",
+            nullable = false
     )
-    private Long employeeId;
+    private Long id;
 
     @Column(
             name = "role"
@@ -39,22 +37,7 @@ public class Employee {
     private String password;
 
     @Column(
-            name = "full_name"
+            name = "phone"
     )
-    private String fullName;
-
-    @Column(
-            name = "gender"
-    )
-    private String gender;
-
-    @Column(
-            name = "work_area_id"
-    )
-    private Long workAreaId;
-
-    @Column(
-            name = "leader_id"
-    )
-    private Long leaderId;
+    private String phone;
 }
